@@ -46,6 +46,7 @@ public class movement : MonoBehaviour
 
 
         // Apply movement
+        mv = Vector3.Normalize(mv);
         rb.MovePosition(rb.position + mv * speed * Time.fixedDeltaTime);
 
         //Vector3 newpos = new Vector3((float)ws, (float)ad) * speed;       
