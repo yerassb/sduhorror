@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class movement : MonoBehaviour
 {
+    [SerializeField] private FieldOfView fieldOfView;
     BoxCollider2D boxCollider;
 
     public GameObject Camera;
@@ -75,7 +76,8 @@ public class movement : MonoBehaviour
         
         rb.MovePosition(rb.position + mv * speed * Time.fixedDeltaTime);
 
-
+        fieldOfView.SetOrigin(transform.position);
+        fieldOfView.SetAimDirection(transform.position - UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition));
         cameraFollow();
     }
     private void OnCollisionEnter2D(Collision2D collision) {      
@@ -88,7 +90,7 @@ public class movement : MonoBehaviour
         float newy = Mathf.MoveTowards(Camera.transform.position.y, transform.position.y, maxDelta);
         Vector3 newpos = new Vector3(newx, newy, Camera.transform.position.z);
 
-        Camera.transform.position = newpos;
+        Camera.transform.position = newpos;        
     }
     void staminaIncrease(float multiplier) {
         if(stamina < 1) {
