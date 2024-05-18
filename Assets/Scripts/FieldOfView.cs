@@ -73,6 +73,6 @@ public class FieldOfView : MonoBehaviour
         if (n < 0) {
             n += 360;
         }
-        startingAngle = n - fov / 2f;
+        startingAngle = n + fov / 2f + 180f;
     }
 }
