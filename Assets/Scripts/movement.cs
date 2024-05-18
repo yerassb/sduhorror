@@ -15,8 +15,8 @@ public class movement : MonoBehaviour
     public float staminaDecreaseRate;
     public Slider staminaBar;
 
-    float mvSpeed = 6f;
-    float runSpeed = 10f;
+    float mvSpeed = 8f;
+    float runSpeed = 12f;
 
     Rigidbody2D rb;
 

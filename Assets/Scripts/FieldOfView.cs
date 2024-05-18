@@ -13,14 +13,14 @@ public class FieldOfView : MonoBehaviour
     private void Start() {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;        
-        fov = 45f;
+        fov = 60f;
     }
     private void LateUpdate() {        
         
         int rayCount = 50;
         float angle = startingAngle;
         float angleIncrease = fov / rayCount;
-        float viewDistance = 10f;
+        float viewDistance = 13f;
 
         Vector3[] vertices = new Vector3[rayCount + 2];
         Vector2[] uv = new Vector2[vertices.Length];
