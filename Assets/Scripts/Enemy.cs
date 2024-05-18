@@ -32,10 +32,12 @@ public class Enemy : MonoBehaviour
         } else {
             sprite.flipX = false;
         }
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerDir, Vector3.Distance(thePlayer.transform.position, transform.position), layerMask);        
-        if(ray.collider.gameObject.tag != "Player") {
+        RaycastHit2D ray;
+        if(ray = Physics2D.Raycast(transform.position, playerDir, Vector3.Distance(thePlayer.transform.position, transform.position), layerMask)) {
             //(-y, x)
-            playerDir = new Vector2(-playerDir.y, playerDir.x);
+            if(ray.collider.gameObject.tag != "Player") {
+                playerDir = new Vector2(-playerDir.y, playerDir.x);
+            }
         }        
         rb.MovePosition(rb.position + playerDir * speed * Time.fixedDeltaTime);        
     }

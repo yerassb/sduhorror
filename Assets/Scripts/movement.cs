@@ -9,6 +9,7 @@ public class movement : MonoBehaviour
     [SerializeField] private FieldOfView fieldOfView;
     BoxCollider2D boxCollider;
 
+    public GameObject pauseMenu;
     public GameObject Camera;
     public float stamina;
     public float staminaIncreaseRate;
@@ -40,6 +41,16 @@ public class movement : MonoBehaviour
         }
 
         mv = new Vector2(ad, ws);
+
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            if(Time.timeScale == 1) {
+                pauseMenu.SetActive(true);
+                PauseGame();
+            } else {
+                pauseMenu.SetActive(false);
+                ResumeGame();
+            }
+        }
     }
     void FixedUpdate()
     {
@@ -117,5 +128,12 @@ public class movement : MonoBehaviour
     IEnumerator RestoreStaminaIncreaseRateAfter(float sec, float def) {
         yield return new WaitForSeconds(sec);
         staminaIncreaseRate = def;
+    }
+    public void PauseGame() {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame() {
+        Time.timeScale = 1;
     }
 }
