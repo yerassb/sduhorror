@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class theDoorLogic : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] gameOver gg;
     public GameObject collectiblesParent;
     public TextMeshProUGUI notification;
     int numberOfKeys;
@@ -42,7 +42,8 @@ public class theDoorLogic : MonoBehaviour
                 notification.text = "Keep looking, you already found " + (totalNo - numberOfKeys);
             } else {
                 Destroy(gameObject);
-                notification.text = "Door is unlocked!";                
+                notification.text = "Door is unlocked!";
+                gg.gameWon();
             }
             StartCoroutine(flashText());
         }
@@ -53,4 +54,5 @@ public class theDoorLogic : MonoBehaviour
         notification.gameObject.SetActive(false);
 
     }
+    
 }

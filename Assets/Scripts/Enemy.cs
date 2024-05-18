@@ -5,6 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] gameOver gg;
+    [SerializeField] LayerMask layerMask;
+
     public GameObject thePlayer;
     Rigidbody2D rb;
     private float speed = 7f;
@@ -20,12 +23,25 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
 
-        Vector2 playerDir = (thePlayer.transform.position - transform.position).normalized;
+        Vector2 playerDir = (thePlayer.transform.position - transform.position);
+        playerDir.y += -0.75f;
+        playerDir = playerDir.normalized;
+
         if(playerDir.x < 0) {
             sprite.flipX = true;
         } else {
             sprite.flipX = false;
         }
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerDir, Vector3.Distance(thePlayer.transform.position, transform.position), layerMask);        
+        if(ray.collider.gameObject.tag != "Player") {
+            //(-y, x)
+            playerDir = new Vector2(-playerDir.y, playerDir.x);
+        }        
         rb.MovePosition(rb.position + playerDir * speed * Time.fixedDeltaTime);        
     }
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.tag == "Player") {
+            gg.gameLost();
+        }
+    }    
 }
